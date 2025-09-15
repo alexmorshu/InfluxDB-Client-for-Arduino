@@ -34,7 +34,8 @@ HTTPService::HTTPService(ConnectionInfo *pConnInfo):_pConnInfo(pConnInfo) {
     }
     checkMFLN(wifiClientSec, pConnInfo->serverUrl);
 #elif defined(ESP32)
-    WiFiClientSecure *wifiClientSec = new WiFiClientSecure;  
+    WiFiClientSecure *wifiClientSec = new WiFiClientSecure;
+    wifiClientSec->setBufferSizes(1024, 4096);
     if (pConnInfo->insecure) {
 #ifndef ARDUINO_ESP32_RELEASE_1_0_4
       // This works only in ESP32 SDK 1.0.5 and higher
